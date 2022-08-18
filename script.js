@@ -39,7 +39,7 @@ function render() {
       html += `
         <div class="todo-block">
           ${item.text}
-          <button data-ID="${item.toDoId}">видалити</button>
+          <button data-ID="${item.toDoId}">delete</button>
         </div>
         
       `;
