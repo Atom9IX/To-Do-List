@@ -1,17 +1,19 @@
 let toDoList = [];
 
 const addNode = document.createElement("div");
+// * todo input
 const inputAddNode = document.createElement("input");
 const addBtnNode = document.createElement("button");
 const containerNode = document.createElement("div");
 
-addBtnNode.textContent = "додати";
+addBtnNode.textContent = "add";
 addNode.appendChild(inputAddNode);
 addNode.appendChild(addBtnNode);
 document.body.appendChild(addNode);
 
+// * functions
 function addToDo(todoText) {
-  let newToDo = {
+  const newToDo = {
     text: todoText,
     status: false,
     toDoId: `${Math.random() * 10}`,
@@ -31,8 +33,11 @@ function render() {
   let html = "";
   toDoList.forEach((item) => {
     if (!item.status) {
+      if (item.text === "") {
+        item.text = "nothing";
+      }
       html += `
-        <div>
+        <div class="todo-block">
           ${item.text}
           <button data-ID="${item.toDoId}">видалити</button>
         </div>
@@ -46,6 +51,7 @@ function render() {
   containerNode.innerHTML = html;
 }
 
+// * event listeners
 addBtnNode.addEventListener("click", (e) => {
   addToDo(`${inputAddNode.value}`);
   render();
@@ -59,7 +65,7 @@ containerNode.addEventListener("click", (e) => {
     const dataID = e.target.dataset.id;
     deleteToDo(dataID);
   }
-  render()
+  render();
 });
 
 render();
